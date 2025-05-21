@@ -25,7 +25,8 @@ namespace ApiActividadesMusicales.Controllers
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM ActividadesMusicales", conn);
+                SqlCommand cmd = new SqlCommand("ConsultarActividadesFuturas", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -117,7 +118,7 @@ namespace ApiActividadesMusicales.Controllers
             catch (SqlException ex)
             {
 
-                return BadRequest($"Error al actualizar la actividad: {ex.Message}");
+                return BadRequest($"Error al eliminar la actividad: {ex.Message}");
             }
         }
     }
